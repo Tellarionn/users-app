@@ -1,0 +1,19 @@
+.dropdowns {
+  margin: 10px 35px 0 35px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  mat-form-field {
+    margin-left: 15px;
+  }
+}
+
+.grid-list {
+  margin: 0 15px;
+}
+
+.cards-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

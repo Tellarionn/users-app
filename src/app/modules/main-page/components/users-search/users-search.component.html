@@ -1,0 +1,71 @@
+<div class="dropdowns">
+  <mat-form-field appearance="outline">
+    <mat-select placeholder="Select users quantity">
+      <mat-option
+        *ngFor="let userQty of usersQty"
+        [value]="usersQty"
+        (click)="selectUsersQty(userQty)"
+      >
+        {{ userQty }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-select placeholder="Select Gender">
+      <mat-option (click)="selectGender(noneValue)" value="None"
+        >None</mat-option
+      >
+      <mat-option
+        *ngFor="let gender of genders"
+        [value]="gender"
+        (click)="selectGender(gender)"
+      >
+        {{ gender }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-select placeholder="Select Natinality">
+      <mat-option (click)="selectNationalities(noneValue)" value="None"
+        >None</mat-option
+      >
+      <mat-option
+        *ngFor="let nationality of nationalities"
+        [value]="nationality"
+        (click)="selectNationalities(nationality)"
+      >
+        {{ nationality }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="example-form-field">
+    <mat-label>Search by name</mat-label>
+    <input matInput type="text" [formControl]="searchFilterControl" />
+  </mat-form-field>
+</div>
+
+<mat-grid-list
+  class="grid-list"
+  [cols]="breakPoint"
+  (window:resize)="onResize($event)"
+  rowHeight="400px"
+  gutterSize="10px"
+>
+  <mat-grid-tile *ngFor="let user of users | async | search : term">
+    <app-user-profile-card
+      [name]="user.name.first"
+      [lastName]="user.name.last"
+      [photo]="user.picture.large"
+      [email]="user.email"
+      [birthday]="user.dob.date"
+      [location]="[
+        user.location.coordinates.latitude,
+        user.location.coordinates.longitude
+      ]"
+      [phone]="user.phone"
+    ></app-user-profile-card>
+  </mat-grid-tile>
+</mat-grid-list>
